@@ -53,13 +53,29 @@
         <div class="row">
           <div class="col-9">
       <h1>Miraj Din Sons Engineering Works Okara, Pakistan.</h1>
-      <p>Agricultural Machinery Manufacturer in Okara.</p>
+      <a  id="namebtn">Agricultural Machinery Manufacturer in Okara</a>
+     
           </div>
           <div class="col-3">
             <img src="images/logo.jpeg">
           </div>
         </div>
+       
+        
+        <a onclick="inputMsg()" id="namebtn" class="btn btn-primary">Name</a>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <Script>
+       
+          function inputMsg(){
+  
+          let name = prompt('Enter your name');
+          document.getElementById('namebtn').innerText = 'Welcome ' +name;
+    }
+    
+
+        </Script>
+        
+        
       
-      <script src="bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
