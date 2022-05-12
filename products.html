@@ -54,7 +54,7 @@
           <div class="card-body">
             <h5 class="card-title">Oil Expeller</h5>
             <p class="card-text">Working capacity:80 to 100 KG in One Hour.<br>ELectricity Connection: Three phase connection is must. <br>12KW/15HP</p>
-            <a href="tel:+923347407242" class="btn btn-primary">Call Now</a>
+            <a onclick="buyProduct(1)" class="btn btn-primary">Call Now</a>
           </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
             <div class="card-body">
               <h5 class="card-title">Atta Chakki 50</h5>
               <p class="card-text">Production Capcity:320kg/Hour-400kg/Hour<br>Power: 30 HP<br>Speed: 4200 RPM</p>
-              <a href="tel:+923347407242" class="btn btn-primary">Call Now</a>
+              <a onclick="buyProduct(2)" class="btn btn-primary">Call Now</a>
             </div>
           </div>
 
@@ -76,7 +76,7 @@
               <div class="card-body">
                 <h5 class="card-title">Livestock Feed Pellet Machine</h5>
                 <p class="card-text">Livestock Feed Pellet machine is Basically a machine which converts animal feed (Wanda) into pellet form. Three phase connection is must. 15 HP motor is best for this machine.</p>
-                <a href="tel:+923347407242" class="btn btn-primary">Call Now</a>
+                <a onclick="buyProduct(3)" class="btn btn-primary">Call Now</a>
               </div>
             </div>
           </div>
@@ -86,12 +86,33 @@
               <div class="card-body">
                 <h5 class="card-title">Wheat Grader (Chan'na)</h5>
                 <p class="card-text">Capacity:480 KG/Hour-600 KG/Hour<br>Power: 2 HP-3 HP<br>Speed:900 RPM</p>
-                <a href="tel:+923347407242" class="btn btn-primary">Call Now</a>
+                <a onclick="buyProduct(4)" class="btn btn-primary">Call Now</a>
               </div>
             </div>
           </div>
         </div>
 
       </div>    
-        <script src="bootstrap/js/bootstrap.min.js"></script>
+        
+        <script>
+          function buyProduct(id) {
+            switch (id) {
+              case 1:
+                alert('Buy Expeller');
+                break;
+              case 2:
+                alert('Buy Chakki');
+                break;
+              case 3:
+                alert('Buy Feed Pellet');
+                break;
+              case 4:
+                alert('Buy Channa');
+                break;
+
+              default:
+                break;
+            }
+          }
+        </script>
  </body>       
