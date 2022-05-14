@@ -53,7 +53,8 @@
         <div class="row">
           <div class="col-9">
       <h1>Miraj Din Sons Engineering Works Okara, Pakistan.</h1>
-      <a  id="namebtn">Agricultural Machinery Manufacturer in Okara</a>
+      <p>Agricultural Machinery Manufacturer in Okara</p>
+      <a  id="namebtn"></a>
      
           </div>
           <div class="col-3">
@@ -61,18 +62,16 @@
           </div>
         </div>
        
-        
-        <a onclick="inputMsg()" id="namebtn" class="btn btn-primary">Name</a>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <Script>
        
-          function inputMsg(){
+          function inputmsg(){
   
           let name = prompt('Enter your name');
           document.getElementById('namebtn').innerText = 'Welcome ' +name;
     }
     
-
+        inputmsg()
         </Script>
         
         
