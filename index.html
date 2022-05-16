@@ -5,6 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("button").click(function(){
+          $.getJSON("https://weatherdbi.herokuapp.com/data/weather/okara", function(result){
+            console.log(result);
+            // $.each(result, function(i, field){
+            //   $("div").append(field + " ");
+            // });
+          });
+        });
+      });
+      </script>
     <style>
       img{
         width:100%;
@@ -52,8 +65,11 @@
       <div class="container">
         <div class="row">
           <div class="col-9">
+            <button>Get JSON data</button>
       <h1>Miraj Din Sons Engineering Works Okara, Pakistan.</h1>
       <p>Agricultural Machinery Manufacturer in Okara</p>
+      
+     
       <a  id="namebtn"></a>
      
           </div>
@@ -71,7 +87,7 @@
           document.getElementById('namebtn').innerText = 'Welcome ' +name;
     }
     
-        inputmsg()
+        //inputmsg()
         </Script>
         
         
