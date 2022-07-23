@@ -4,7 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" >
-    <style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
+  <style>
         img{
             width: 100%;
         }
@@ -18,7 +22,7 @@
     </style>
     <title>Products</title>
   </head>
-  <body>
+  <body >
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand toplogo" href="index.html"><img src="images/logo.jpeg"></a>
@@ -37,70 +41,301 @@
               <li class="nav-item">
                 <a class="nav-link" href="contacts.html">Contact</a>
               </li>
-              
             </ul>
             <form class="d-flex">
             </form>
           </div>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mainmodal" onclick="maincart()">Your Cart</button>
+
         </div>
       </nav>
       <div class="container">
         <ul>
         <h1>Products</h1>
-        <div class="row">
-          <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="images/expeller.jpeg" >
-          <div class="card-body">
-            <h5 class="card-title">Oil Expeller</h5>
-            <p class="card-text">Working capacity:80 to 100 KG in One Hour.<br>ELectricity Connection: Three phase connection is must. <br>12KW/15HP</p>
-            <a onclick="buyProduct(1)" class="btn btn-primary">Call Now</a>
-          </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="images/chakki.jpeg" >
-            <div class="card-body">
-              <h5 class="card-title">Atta Chakki 50</h5>
-              <p class="card-text">Production Capcity:320kg/Hour-400kg/Hour<br>Power: 30 HP<br>Speed: 4200 RPM</p>
-              <a onclick="buyProduct(2)" class="btn btn-primary">Call Now</a>
-            </div>
-          </div>
-
-        </div>
-
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="images/Wanda.jpeg">
-              <div class="card-body">
-                <h5 class="card-title">Livestock Feed Pellet Machine</h5>
-                <p class="card-text">Livestock Feed Pellet machine is Basically a machine which converts animal feed (Wanda) into pellet form. Three phase connection is must. 15 HP motor is best for this machine.</p>
-                <a onclick="buyProduct(3)" class="btn btn-primary">Call Now</a>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="images/channa.jpeg" >
-              <div class="card-body">
-                <h5 class="card-title">Wheat Grader (Chan'na)</h5>
-                <p class="card-text">Capacity:480 KG/Hour-600 KG/Hour<br>Power: 2 HP-3 HP<br>Speed:900 RPM</p>
-                <a onclick="buyProduct(4)" class="btn btn-primary">Call Now</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>    
+        <p><br></p>
         
-      // var storedata=[]; 
-      // storedata.push(data);	
-      // localStorage.setItem("storedata", JSON.stringify(storedata));	
-      
-              default:
-                break;
-            }
-          }
-        </script>
+        <div class="row" id="column">
+         
+        </div>
+
+     
+     
+
+      <!-- Modal -->
+        <div class="modal fade" id="mymodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle">Add to Cart</h2>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+          <div class="modal-body">
+            <!-- <div class="row">
+              <div class="col-3">
+                <p>2 items Selected</p>
+              </div>
+              <div class="col-4">
+                 <p>Total Price: Rs.250,000</p>
+              </div>
+            </div> -->
+                <div class="row">
+                  <div class="col-2">
+                    <img id="picture"  style="width:100% ;">
+                  </div>
+                  <div class="col-3" >
+                    <h4 ><span id="name"></span></h4>
+                    <p>Price: Rs.<span id="price"></span></p>
+                  </div>
+                  <div class="col-3">
+                    <p><br></p>
+                    <label for="Quantity" style="text-align: center;" >Quantity:</label>
+                   <select name="quantity" id="quantity" >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                   </select>
+                  </div>
+                  <div class="col">
+                    <p><br></p>
+                    <p ><b> Total Price:</b> Rs.<span  id="totprice"></span></p>
+                  </div>
+                   
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save"  data-dismiss="modal">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <!-- Main cart -->
+      <div class="modal fade" id="mainmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="exampleModalLongTitle">Your Cart</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+         <div class="modal-body">
+              <div class="row" id="maincart">
+               <span id="index"></span>
+                 
+              </div>
+            </div>
+            <div class="modal-footer">
+              <h3 style="margin-left: 0%;">Total Price: Rs. <span id="TotalPriceMainCart"></span></h3>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Order</button>
+            </div>
+          </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+       <script>
+var DATA=[];
+var tempcount=[];
+//  console.log(getDATA);
+function product(data) {
+			$('#column').html('');
+			let name='';
+			for (let index = 0; index < data.length; index++) {
+			name=name+`
+      <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="`+data[index].imageout+`" >
+                <div class="card-body">
+                  <h2 class="card-title">`+data[index].name+`</h2>
+                  <p>`+data[index].price+`</p>
+                  <p class="card-text">`+data[index].disc+`</p>
+                  <a data-toggle="modal" data-target="#mymodal" onclick="modaldata('`+data[index].commonname+`')">
+                    <button type="button" class="btn btn-primary" >Add to Cart</button>                 
+                  </a>
+                </div>
+            </div>
+     </div>`
+    }
+		$('#column').html(name);
+	}
+function maincart(obt){
+  var obt = JSON.parse(localStorage.getItem("newdata"));
+   //console.log(obt);
+  $('#maincart').html('');
+  let name='';
+  for (let index = 0; index < obt.length; index++){
+    
+    name=name+`
+    <div class="col-2">
+      <img src="`+obt[index].image+`"  style="width:100% ;">
+    </div>
+    <div class="col-3" >
+      <h5 >`+obt[index].name+`</h5>
+      <p>Price: Rs.`+obt[index].price+`</p>
+    </div>
+    <div class="col-2">
+     <p><br></p> 
+    <h5 id="newcount"><b>Quantity:</b>`+obt[index].quantity+`</h5>
+    </div>
+    <div class="col-2">
+     <p><br></p> 
+    <h5><b>Total Price:</b> Rs.`+obt[index].total+`</h5>
+    </div>
+    <div class="col-2">
+      <p><br></p> 
+      <button type="button" id="remove" class="btn btn-primary" onclick="removeindex('`+obt[index].name+`')">Remove</button>
+    </div>
+  `
+ // $('#remove').attr("onclick", "remove('"+DATA[index].commonname+"')");
+ //$('#save').attr("onclick", "quantadd('"+obt[index].name+"')");
+//console.log(obt[index].quantity);
+  }
+  $('#maincart').html(name);
+
+}
+  function modaldata(commonname){
+    for (let index = 0; index < DATA.length; index++){
+          if (DATA[index].commonname==commonname) {
+            
+            $('#name').text(DATA[index].name);
+            $('#price').text(DATA[index].price);
+            $('#picture').attr("src", DATA[index].imageout); 
+            $('#quantity').attr("onchange", "calc('"+DATA[index].commonname+"')");
+            $('#save').attr("onclick", "quantadd('"+DATA[index].name+"');check('"+DATA[index].commonname+"')");
+            // var add=document.getElementById("save");
+            // console.log(add);
+            // add.addEventListener("onclick",save(DATA[index].commonname))
+            // add.addEventListener("onclick",quantadd(DATA[index].name))
+            // onchange="calc(commonname)"
+              var countproduct=document.getElementById("quantity").value;
+              var price=DATA[index].price;
+              var total=document.getElementById("totprice");
+              total.innerHTML=price*countproduct;
+             }
+         }     
+  }
+    function calc(commonname){
+      var newdata=[];
+      var total=document.getElementById("totprice");
+      var select = document.getElementById('quantity');
+      var count = select.options[select.selectedIndex].value;
+        for (let index = 0; index < DATA.length; index++){
+              if (DATA[index].commonname==commonname) {
+                var price=DATA[index].price;
+                total.innerHTML=count*price; 
+               }
+              }     
+  }
+function check(commonname) {
+  var include=[];
+  var obt = JSON.parse(localStorage.getItem("newdata"));
+  for (let index = 0; index < obt.length; index++){
+        include.push(obt[index].common);
+      }
+    if (include.includes(commonname)) {
+         
+       }
+    else{
+     save(commonname);
+   }
+  }
+function save(commonname) {
+  var newdata=[];
+  var common=[];
+  var include=[];
+      var total=document.getElementById("totprice");
+      var select = document.getElementById('quantity');
+    var count = select.options[select.selectedIndex].value;
+        for (let index = 0; index < DATA.length; index++){
+              if (DATA[index].commonname==commonname) {
+                var tempprice=DATA[index].price;
+                total.innerHTML=count*tempprice;  
+                var tempname=DATA[index].name;
+                var tempimage=DATA[index].imageout;
+                var getobj = JSON.parse(localStorage.getItem("newdata"));
+                if (getobj==null) {
+                  getobj=[];
+                }
+                let cartdata = {
+                  name: tempname,
+                  quantity  : count,
+                  image     : tempimage,
+                  price  : tempprice,
+                  total  : total.innerHTML,
+                  common : commonname
+                };
+                getobj.push(cartdata);
+                localStorage.setItem("newdata", JSON.stringify(getobj));
+               //localStorage.setItem("newdata", JSON.stringify(cartdata));
+               //quantadd(DATA[index].name) ; 
+              }
+        }
+ }
+
+ function quantadd(name) {
+  var obt = JSON.parse(localStorage.getItem("newdata"));
+  var newobj=[];
+  if (obt==null) {
+        obt=[];
+      }
+    for (let index = 0; index < obt.length; index++){
+     
+      newobj.push(obt[index].name)
+      if(newobj.includes(name)) {
+        if (obt[index].name==name) {
+          var total=document.getElementById("totprice").innerHTML;
+          //console.log(total);
+          var select = document.getElementById('quantity');
+          var newcount = select.options[select.selectedIndex].value;
+          var count=obt[index].quantity;
+          count=+count + +newcount;
+          obt[index].quantity=count;
+          var newtotal=obt[index].total;
+          newtotal=+newtotal + +total;
+          obt[index].total=newtotal;
+    }
+      // console.log(newtotal);
+      // console.log(count);
+     }
+     
+    }
+    localStorage.setItem("newdata", JSON.stringify(obt));
+
+  }
+ function removeindex(name) {
+   var obt = JSON.parse(localStorage.getItem("newdata"));
+   var newobj=[];
+    for (let index = 0; index < obt.length; index++){
+      if (obt[index].name==name) {
+  var element=document.getElementById("maincart").innerHTML;
+  element.remove();
+  // console.log(element);  
+     
+      }
+      else{
+      newobj.push(obt[index]);
+      //console.log(newobj);
+      }
+    }
+  localStorage.setItem("newdata",JSON.stringify(newobj));
+  
+}
+function total() {
+  
+}
+
+      $.getJSON("./products.json",function(data){
+      for (let index = 0; index < data.length; index++) {
+       // console.log(data[index]);
+      DATA.push(data[index]);	
+       }
+        product(data);
+    }
+		);
+   </script>
  </body>       

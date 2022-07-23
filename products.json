@@ -1,0 +1,94 @@
+[{
+    "name": "Oil Expeller", 
+    "imageout":"images/expeller.jpeg",
+    
+    "commonname":"expelle",
+    "disc":"These Oil Expellers are specially designed to obtain the highest possible level of oil from the seeds. Its Chamber is Fitted with the worms which is made of most durable material. Whole body is made of pure Iron included the Bearings, Gears and Axcel Shaft.",
+    "price":"250000",
+    "ext":"It can Extract Oil from",
+    "mus":"Mustard",
+    "sun":"Sun Flower",
+    "coc":"Coconut",
+    "sea":"Sesame",
+
+    "prodcap":"80 kg/hour - 100 kg/hour",
+    "weight":"480kg",
+    "color":"Metallic Green",
+
+    "con":"Three Phase Connection is must.",
+    "power":"15 HP is best for this machine. However can also work on 12 HP."
+    ,
+    "video":"https://youtu.be/Fa7tHCLzH_8",
+    "page":"oil_expeller.html"
+    
+},
+{
+    "name":"Wheat Grinder/Atta Chakki (50 number)", 
+    "imageout":"images/chakki.jpeg",
+    "imagein":"images/chakki50.jpeg",
+    "price":"75000",
+
+    "commonname":"chakki50",
+    "common":"flour",
+    "disc":"Wheat Grinder Machine 50 Number is the standard size Grinding machines. These are used all over Pakistan .In past, Stones were used to grind the wheat. Now, In the Updated version of these machines we are using Blades instead of stones as they are more Efficient, Productive and easily Replaceable.",
+   
+    "prodcap":"320 Kg/H - 400 Kg/H (15 Hp)",
+    "weight":"170kg",
+    "color":"Green,Silver (can also be painted on order)",
+    "speed":"4200 RPM",
+    "Guarantee":"No Vibration, Smooth Performance, No Heating Problem."
+    ,
+    
+    "connection":"Three Phase Connection is must.",
+    "power":"15 HP is best for this machine ,can also work on 10 HP.",
+    "page":"wheat_grinder_50.html"    
+},
+{
+    "name": "Wheat Grinder/Atta Chakki (23/45)", 
+    "imageout":"images/chakki23.jpeg",
+    "imagein":"images/chakki23.jpeg",
+    
+    "price":"35000",
+    "commonname":"chakki23",
+    "common":"flour",
+    "disc":"Atta Chakki number 23/45 is a Smaller version of full size Machine. Mostly it is used to grind Red Peppers. This size is best for work on small scale.",
+
+    "prodcap":"80 Kg/h - 100 Kg/h (on 2 HP motor)",
+    "color":"Green,Silver (can also be painted on order)",
+    "Guarantee":"No Vibration, Smooth Performance, No Heating Problem.",
+    "reqpower":"2 HP - 3 HP",
+    "page":"wheat_grinder_23-45.html"  
+
+    
+},
+{
+    "name":"Wheat Grader",
+    "imageout":"images/channa.jpeg",
+    "imagein":"images/Channa 2.jpeg",
+    
+    "price":"50000",
+    "commonname":"channa",
+    "common":"flour",
+    "disc":"For the production of high Quality flour, it is necessary to grind clean and pure wheat. Wheat Grader filters the impurities and non-wheat materials from wheat. The filtered wheat can be grind to make high quality Flour.",
+    
+    "prodcap":"480 kg/h - 500 kg/h",
+    "weight":"2 Hp - 3 HP ",
+    "color":"Beige,Silver",
+    "speed":"900 RPM",
+    "page":"wheat_grader.html"  
+},
+{
+    "name":"Livestock Feed Pellet (Wanda) Machine",
+    "imageout":"images/Wanda.jpeg",
+        
+    "price":"250000",
+    "commonname":"wanda",
+    "disc":"Livestock Feed Pellet (Wanda) Machine is basically a machine which converts animal feed (Wanda) in pellet form. This Form of feed is Easily Convertable in Powder Form by Grinding Machine.",
+  
+    "connection":"Three Phase Connection is must.",
+    "power":"15 HP is best for this machine",
+  
+    "video":"https://youtu.be/yeII1295TAM",
+    "page":"livestock_feed_pellet.html"  
+}
+]
