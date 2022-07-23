@@ -312,10 +312,10 @@ function save(commonname) {
    var newobj=[];
     for (let index = 0; index < obt.length; index++){
       if (obt[index].name==name) {
-  var element=document.getElementById("maincart").innerHTML;
-  element.remove();
-  // console.log(element);  
-     
+        var element=document.getElementById("maincart").innerHTML;
+        element.remove();
+        // console.log(element);  
+          
       }
       else{
       newobj.push(obt[index]);
@@ -325,9 +325,7 @@ function save(commonname) {
   localStorage.setItem("newdata",JSON.stringify(newobj));
   
 }
-function total() {
-  
-}
+
 
       $.getJSON("./products.json",function(data){
       for (let index = 0; index < data.length; index++) {
