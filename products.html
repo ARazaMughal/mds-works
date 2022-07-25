@@ -45,7 +45,7 @@
             <form class="d-flex">
             </form>
           </div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mainmodal" onclick="maincart()">Your Cart</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mainmodal" onclick="maincart();total()">Your Cart</button>
 
         </div>
       </nav>
@@ -106,7 +106,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="save"  data-dismiss="modal">Add</button>
+                <button type="button" class="btn btn-primary" id="save"  data-dismiss="modal" >Add</button>
               </div>
             </div>
           </div>
@@ -122,16 +122,14 @@
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-         <div class="modal-body">
-              <div class="row" id="maincart">
-               <span id="index"></span>
-                 
-              </div>
+         <div class="modal-body" id="maincart">
+              
             </div>
             <div class="modal-footer">
               <h3 style="margin-left: 0%;">Total Price: Rs. <span id="TotalPriceMainCart"></span></h3>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Order</button>
+              <a id="order" type="button" class="btn btn-primary" onclick="order()">Order</a>
+              <!-- <a href="https://wa.me/+923463724416/?text=hello">Whatsapp</a> -->
             </div>
           </div>
         </div>
@@ -140,8 +138,9 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
        <script>
 var DATA=[];
-var tempcount=[];
+var sum;
 //  console.log(getDATA);
+
 function product(data) {
 			$('#column').html('');
 			let name='';
@@ -165,12 +164,14 @@ function product(data) {
 	}
 function maincart(obt){
   var obt = JSON.parse(localStorage.getItem("newdata"));
-   //console.log(obt);
+  if (obt==null) {
+    obt=[];
+  }
   $('#maincart').html('');
   let name='';
   for (let index = 0; index < obt.length; index++){
-    
-    name=name+`
+   // console.log(obt[index].name);
+    name=name+`<div class="row" id="prod`+index+`">
     <div class="col-2">
       <img src="`+obt[index].image+`"  style="width:100% ;">
     </div>
@@ -188,12 +189,10 @@ function maincart(obt){
     </div>
     <div class="col-2">
       <p><br></p> 
-      <button type="button" id="remove" class="btn btn-primary" onclick="removeindex('`+obt[index].name+`')">Remove</button>
+      <button type="button" class="btn btn-primary" onclick="removeindex('`+obt[index].name+`');total();$('#prod`+index+`').hide(25)">Remove</button>
     </div>
-  `
- // $('#remove').attr("onclick", "remove('"+DATA[index].commonname+"')");
- //$('#save').attr("onclick", "quantadd('"+obt[index].name+"')");
-//console.log(obt[index].quantity);
+    </div>
+  `;
   }
   $('#maincart').html(name);
 
@@ -206,7 +205,9 @@ function maincart(obt){
             $('#price').text(DATA[index].price);
             $('#picture').attr("src", DATA[index].imageout); 
             $('#quantity').attr("onchange", "calc('"+DATA[index].commonname+"')");
-            $('#save').attr("onclick", "quantadd('"+DATA[index].name+"');check('"+DATA[index].commonname+"')");
+            $('#save').attr("onclick", "quantadd('"+DATA[index].name+"');check('"+DATA[index].commonname+"');total()");
+            
+
             // var add=document.getElementById("save");
             // console.log(add);
             // add.addEventListener("onclick",save(DATA[index].commonname))
@@ -248,6 +249,7 @@ function save(commonname) {
   var newdata=[];
   var common=[];
   var include=[];
+
       var total=document.getElementById("totprice");
       var select = document.getElementById('quantity');
     var count = select.options[select.selectedIndex].value;
@@ -267,7 +269,8 @@ function save(commonname) {
                   image     : tempimage,
                   price  : tempprice,
                   total  : total.innerHTML,
-                  common : commonname
+                  common : commonname,
+                  
                 };
                 getobj.push(cartdata);
                 localStorage.setItem("newdata", JSON.stringify(getobj));
@@ -280,11 +283,11 @@ function save(commonname) {
  function quantadd(name) {
   var obt = JSON.parse(localStorage.getItem("newdata"));
   var newobj=[];
-  if (obt==null) {
+  
+    for (let index = 0; index < obt.length; index++){
+      if (obt==null) {
         obt=[];
       }
-    for (let index = 0; index < obt.length; index++){
-     
       newobj.push(obt[index].name)
       if(newobj.includes(name)) {
         if (obt[index].name==name) {
@@ -298,6 +301,7 @@ function save(commonname) {
           var newtotal=obt[index].total;
           newtotal=+newtotal + +total;
           obt[index].total=newtotal;
+          
     }
       // console.log(newtotal);
       // console.log(count);
@@ -312,10 +316,7 @@ function save(commonname) {
    var newobj=[];
     for (let index = 0; index < obt.length; index++){
       if (obt[index].name==name) {
-        var element=document.getElementById("maincart").innerHTML;
-        element.remove();
-        // console.log(element);  
-          
+        //$('#prod'+obt[index].name).hide();
       }
       else{
       newobj.push(obt[index]);
@@ -325,8 +326,40 @@ function save(commonname) {
   localStorage.setItem("newdata",JSON.stringify(newobj));
   
 }
+function total() {
+  var a=[];
+  var obt = JSON.parse(localStorage.getItem("newdata"));
+  for (let index = 0; index < obt.length; index++){
+    //console.log(obt[index].total);
+    a.push(obt[index].total);
+    b.push(obt[index].sum);
+    if (a==null) {
+      sum="0";
+    }
+    // var a = [1,2,3];
+    sum = a.reduce(function(a, b) { return +a + + b; }, 0);
+     
+  }
+  if (sum==null) {
+      sum="0";
+    }
+  //console.log(sum);
+  $("#TotalPriceMainCart").text(sum);
+}
+function order() {
+  var obt = JSON.parse(localStorage.getItem("newdata"));
+  var textMsg='Hey There! I would like to buy following Products %0A';
+  for (let index =0 ; index < obt.length; index++){
+  // console.log(index+1);
+    textMsg=textMsg+`%0A
+Product Name:`+obt[index].name+`%0A
+Quantity:`+obt[index].quantity+`%0A
+Price:`+obt[index].total+`%0A`
+  }
+console.log(sum);
 
-
+  $('#order').attr("href","https://wa.me/+923463724416/?text="+textMsg); 
+}
       $.getJSON("./products.json",function(data){
       for (let index = 0; index < data.length; index++) {
        // console.log(data[index]);
