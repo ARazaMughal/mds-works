@@ -123,10 +123,10 @@
                 </button>
             </div>
          <div class="modal-body" id="maincart">
-              
+          
             </div>
             <div class="modal-footer">
-              <h3 style="margin-left: 0%;">Total Price: Rs. <span id="TotalPriceMainCart"></span></h3>
+              <h4 style="margin-left: 0%;">Total Price: Rs. <span id="TotalPriceMainCart"></span></h4>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
               <a id="order" type="button" class="btn btn-primary" onclick="order()">Order</a>
               <!-- <a href="https://wa.me/+923463724416/?text=hello">Whatsapp</a> -->
@@ -138,7 +138,6 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
        <script>
 var DATA=[];
-var sum;
 //  console.log(getDATA);
 
 function product(data) {
@@ -147,12 +146,12 @@ function product(data) {
 			for (let index = 0; index < data.length; index++) {
 			name=name+`
       <div class="col">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style="width: 15rem;">
               <img class="card-img-top" src="`+data[index].imageout+`" >
                 <div class="card-body">
-                  <h2 class="card-title">`+data[index].name+`</h2>
-                  <p>`+data[index].price+`</p>
-                  <p class="card-text">`+data[index].disc+`</p>
+                  <h4 class="card-title">`+data[index].name+`</h4>
+                 <br> <p><b>Price:</b> Rs.`+data[index].price+`</p>
+                 
                   <a data-toggle="modal" data-target="#mymodal" onclick="modaldata('`+data[index].commonname+`')">
                     <button type="button" class="btn btn-primary" >Add to Cart</button>                 
                   </a>
@@ -168,34 +167,40 @@ function maincart(obt){
     obt=[];
   }
   $('#maincart').html('');
-  let name='';
+  let name=`
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  `;
   for (let index = 0; index < obt.length; index++){
    // console.log(obt[index].name);
-    name=name+`<div class="row" id="prod`+index+`">
-    <div class="col-2">
-      <img src="`+obt[index].image+`"  style="width:100% ;">
-    </div>
-    <div class="col-3" >
-      <h5 >`+obt[index].name+`</h5>
-      <p>Price: Rs.`+obt[index].price+`</p>
-    </div>
-    <div class="col-2">
-     <p><br></p> 
-    <h5 id="newcount"><b>Quantity:</b>`+obt[index].quantity+`</h5>
-    </div>
-    <div class="col-2">
-     <p><br></p> 
-    <h5><b>Total Price:</b> Rs.`+obt[index].total+`</h5>
-    </div>
-    <div class="col-2">
-      <p><br></p> 
-      <button type="button" class="btn btn-primary" onclick="removeindex('`+obt[index].name+`');total();$('#prod`+index+`').hide(25)">Remove</button>
-    </div>
-    </div>
+   
+    name=name+
+  `
+    <tr id="prod`+index+`">
+      <td>
+        <img src="`+obt[index].image+`"  style="width:100%;">
+      </td>
+      <td>`+obt[index].name+`</td>
+      <td>`+obt[index].quantity+`</td>
+      <td>`+obt[index].total+`</td>
+      <td><button type="button" class="btn btn-primary" onclick="removeindex('`+obt[index].name+`');total();$('#prod`+index+`').hide(50)">X</button></td>
+    </tr>
   `;
   }
+  name=name+`
+  </tbody>
+</table>`;
   $('#maincart').html(name);
-
+  
 }
   function modaldata(commonname){
     for (let index = 0; index < DATA.length; index++){
@@ -332,12 +337,11 @@ function total() {
   for (let index = 0; index < obt.length; index++){
     //console.log(obt[index].total);
     a.push(obt[index].total);
-    b.push(obt[index].sum);
     if (a==null) {
       sum="0";
     }
     // var a = [1,2,3];
-    sum = a.reduce(function(a, b) { return +a + + b; }, 0);
+    var sum = a.reduce(function(a, b) { return +a + + b; }, 0);
      
   }
   if (sum==null) {
@@ -347,19 +351,25 @@ function total() {
   $("#TotalPriceMainCart").text(sum);
 }
 function order() {
+  // var a=[];
+  var add=document.getElementById("TotalPriceMainCart").innerHTML;
+//  console.log(add);
   var obt = JSON.parse(localStorage.getItem("newdata"));
   var textMsg='Hey There! I would like to buy following Products %0A';
   for (let index =0 ; index < obt.length; index++){
-  // console.log(index+1);
+    // a.push(obt[index].total);    
+    // sum = a.reduce(function(a, b) { return +a + + b; }, 0);
+   
     textMsg=textMsg+`%0A
 Product Name:`+obt[index].name+`%0A
 Quantity:`+obt[index].quantity+`%0A
-Price:`+obt[index].total+`%0A`
+Price:Rs.`+obt[index].total+`%0A`
   }
-console.log(sum);
+  textMsg=textMsg+`%0A Total Price:Rs.`+add+`%0A`
 
-  $('#order').attr("href","https://wa.me/+923463724416/?text="+textMsg); 
+  $('#order').attr("href","https://wa.me/+923146740415/?text="+textMsg); 
 }
+
       $.getJSON("./products.json",function(data){
       for (let index = 0; index < data.length; index++) {
        // console.log(data[index]);
@@ -368,6 +378,8 @@ console.log(sum);
         product(data);
     }
 		);
-    localStorage.setItem("newdata","[]");
+     if (localStorage.getItem("newdata")==null) {
+      localStorage.setItem("newdata","[]");
+     }
    </script>
  </body>       
