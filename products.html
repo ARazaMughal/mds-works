@@ -4,53 +4,56 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" >
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
   <style>
-        img{
-            width: 100%;
-        }
-        .toplogo{
+       img{
+        width:100%;
+      }
+      .toplogo{
         width: 60px;
         height: 60px;
       }
-      .container{
-        padding: 30px 0px 0px;
+      .container {
+        padding: 100px 0px 0px 15px;
+
       }
     </style>
     <title>Products</title>
   </head>
   <body >
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand toplogo" href="index.html"><img src="images/logo.jpeg"></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html">About</a>
-              <li class="nav-item">
-                <a class="nav-link" href="products.html">Products</a>
-              <li class="nav-item">
-                <a class="nav-link" href="contacts.html">Contact</a>
-              </li>
-            </ul>
-            <form class="d-flex">
-            </form>
-          </div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mainmodal" onclick="maincart();total()">Your Cart</button>
-
+      <div class="container-fluid">
+        <a class="navbar-brand toplogo" href="index.html"><img src="images/logo.jpeg"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>  
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contacts.html">Contact</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+          </form>
         </div>
-      </nav>
+      </div>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mainmodal" onclick="maincart();total()">Your Cart</button>
+
+    </nav>
+
       <div class="container">
-        <ul>
         <h1>Products</h1>
         <p><br></p>
         
@@ -191,8 +194,8 @@ function maincart(obt){
       </td>
       <td>`+obt[index].name+`</td>
       <td>`+obt[index].quantity+`</td>
-      <td>`+obt[index].total+`</td>
-      <td><button type="button" class="btn btn-primary" onclick="removeindex('`+obt[index].name+`');total();$('#prod`+index+`').hide(50)">X</button></td>
+      <td>Rs.`+obt[index].total+`</td>
+      <td><button type="button" class="btn btn-primary" onclick="removeindex('`+obt[index].name+`');total();$('#prod`+index+`').hide(50)">Remove</button></td>
     </tr>
   `;
   }
@@ -333,12 +336,17 @@ function save(commonname) {
 }
 function total() {
   var a=[];
+
   var obt = JSON.parse(localStorage.getItem("newdata"));
   for (let index = 0; index < obt.length; index++){
     //console.log(obt[index].total);
     a.push(obt[index].total);
     if (a==null) {
       sum="0";
+      $("#order").hide();
+    }
+    else{
+      $("#order").show();
     }
     // var a = [1,2,3];
     var sum = a.reduce(function(a, b) { return +a + + b; }, 0);
@@ -346,14 +354,17 @@ function total() {
   }
   if (sum==null) {
       sum="0";
+      $("#order").hide();
     }
+  else{
+    $("#order").show();
+  }
   //console.log(sum);
   $("#TotalPriceMainCart").text(sum);
 }
 function order() {
   // var a=[];
   var add=document.getElementById("TotalPriceMainCart").innerHTML;
-//  console.log(add);
   var obt = JSON.parse(localStorage.getItem("newdata"));
   var textMsg='Hey There! I would like to buy following Products %0A';
   for (let index =0 ; index < obt.length; index++){
@@ -365,7 +376,7 @@ Product Name:`+obt[index].name+`%0A
 Quantity:`+obt[index].quantity+`%0A
 Price:Rs.`+obt[index].total+`%0A`
   }
-  textMsg=textMsg+`%0A Total Price:Rs.`+add+`%0A`
+  textMsg=textMsg+`%0ATotal Price:Rs.`+add+`%0A`
 
   $('#order').attr("href","https://wa.me/+923146740415/?text="+textMsg); 
 }
